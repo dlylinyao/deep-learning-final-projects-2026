@@ -1,0 +1,8 @@
+1. Projects:
+   Text Classification
+   Difficulty Assessment
+2. Group Members:
+   Linyao Du (Student Number:020433437)
+   Aojie Yin (Student Number:020297657)
+3. All files for our projects (including code, outputs, slides and reports) are saved in the following GitHub repository:
+   https://github.com/dlylinyao/deep-learning-final-projects-2026/tree/main
