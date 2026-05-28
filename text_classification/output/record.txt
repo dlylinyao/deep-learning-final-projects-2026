@@ -1,0 +1,277 @@
+/01_data_preprocessing.py"
+ Start parsing all XML files in ./all_training_data...
+  Parsed 5000 articles... Time: 57.9 s
+  Parsed 10000 articles... Time: 112.3 s
+  Parsed 15000 articles... Time: 168.6 s
+  Parsed 20000 articles... Time: 227.3 s
+  Parsed 25000 articles... Time: 284.3 s
+  Parsed 30000 articles... Time: 345.4 s
+  Parsed 35000 articles... Time: 402.6 s
+  Parsed 40000 articles... Time: 459.8 s
+  Parsed 45000 articles... Time: 515.6 s
+  Parsed 50000 articles... Time: 576.7 s
+  Parsed 55000 articles... Time: 636.6 s
+  Parsed 60000 articles... Time: 698.0 s
+  Parsed 65000 articles... Time: 752.0 s
+  Parsed 70000 articles... Time: 813.9 s
+  Parsed 75000 articles... Time: 875.9 s
+  Parsed 80000 articles... Time: 938.2 s
+  Parsed 85000 articles... Time: 999.5 s
+  Parsed 90000 articles... Time: 1062.6 s
+  Parsed 95000 articles... Time: 1126.3 s
+  Parsed 100000 articles... Time: 1190.5 s
+  Parsed 105000 articles... Time: 1260.8 s
+  Parsed 110000 articles... Time: 1325.7 s
+  Parsed 115000 articles... Time: 1382.7 s
+  Parsed 120000 articles... Time: 1416.2 s
+  Parsed 125000 articles... Time: 1430.8 s
+  Parsed 130000 articles... Time: 1446.9 s
+  Parsed 135000 articles... Time: 1461.4 s
+  Parsed 140000 articles... Time: 1509.4 s
+  Parsed 145000 articles... Time: 1569.6 s
+  Parsed 150000 articles... Time: 1639.8 s
+  Parsed 155000 articles... Time: 1707.9 s
+  Parsed 160000 articles... Time: 1774.4 s
+  Parsed 165000 articles... Time: 1842.9 s
+  Parsed 170000 articles... Time: 1908.5 s
+  Parsed 175000 articles... Time: 1972.7 s
+  Parsed 180000 articles... Time: 2042.2 s
+  Parsed 185000 articles... Time: 2112.7 s
+  Parsed 190000 articles... Time: 2180.3 s
+  Parsed 195000 articles... Time: 2246.2 s
+  Parsed 200000 articles... Time: 2312.2 s
+  Parsed 205000 articles... Time: 2373.3 s
+  Parsed 210000 articles... Time: 2440.6 s
+  Parsed 215000 articles... Time: 2512.0 s
+  Parsed 220000 articles... Time: 2569.9 s
+  Parsed 225000 articles... Time: 2626.0 s
+  Parsed 230000 articles... Time: 2676.2 s
+  Parsed 235000 articles... Time: 2736.9 s
+  Parsed 240000 articles... Time: 2794.6 s
+  Parsed 245000 articles... Time: 2849.9 s
+  Parsed 250000 articles... Time: 2910.8 s
+  Parsed 255000 articles... Time: 2968.9 s
+  Parsed 260000 articles... Time: 3028.9 s
+  Parsed 265000 articles... Time: 3095.0 s
+  Parsed 270000 articles... Time: 3149.7 s
+  Parsed 275000 articles... Time: 3206.0 s
+  Parsed 280000 articles... Time: 3262.4 s
+  Parsed 285000 articles... Time: 3318.4 s
+  Parsed 290000 articles... Time: 3373.3 s
+  Parsed 295000 articles... Time: 3434.4 s
+ Parsing completed! Total valid articles: 299107
+Processing labels (MultiLabelBinarizer)...
+Saving cache files...
+ Preprocessing done! Data saved to reuters_clean_all.pkl
+
+
+/02_train_baseline_full.py"
+ Loading 300k cleaned data...
+ Load done! Time: 5.18 s
+ Train size: 239285 | Val size: 59822
+
+ Building TF-IDF features (top 20000 words)...
+
+ Training Logistic Regression (OneVsRest multi-label)...
+  (This may take 5-15 minutes, please wait...)
+ Training done! Time: 2125.16 s
+
+ Predicting and finding best threshold...
+------------------------------
+ Threshold = 0.2
+  Micro-F1: 0.6409
+  Macro-F1: 0.4611
+------------------------------
+ Threshold = 0.3
+  Micro-F1: 0.7054
+  Macro-F1: 0.5229
+------------------------------
+ Threshold = 0.4
+  Micro-F1: 0.7491
+  Macro-F1: 0.5707
+------------------------------
+ Threshold = 0.5
+  Micro-F1: 0.7816
+  Macro-F1: 0.6083
+------------------------------
+ Threshold = 0.6
+  Micro-F1: 0.8064
+  Macro-F1: 0.6417
+
+ Baseline test done!
+
+max_length=256
+learning_rate=3e-5,  
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=32,
+    num_train_epochs=3,
+threshold = 0.5  
+ [linyaodu@puhti-login14 Linyao_deep_learning]$ python test_eval.py ground_truth.txt my_predictions.txt
+my_predictions.txt: f1=0.8785100996920507, prec=0.9189291864483122, recall=0.8414968721421712
+threshold = 0.45  
+my_predictions.txt: f1=0.8804888289405141, prec=0.9098592613414782, recall=0.8529552684041571
+threshold = 0.4
+my_predictions.txt: f1=0.8815532392520158, prec=0.8993118423576144, recall=0.8644824087942489
+threshold = 0.55
+my_predictions.txt: f1=0.8758419527863381, prec=0.9271751058068375, recall=0.8298947381577824
+threshold = 0.35
+my_predictions.txt: f1=0.881465992615758, prec=0.8868115081854188, recall=0.8761845342377005
+threshold = 0.3
+my_predictions.txt: f1=0.8796830439669667, prec=0.8718013502454992, recall=0.8877085498946965
+
+max_length=256
+learning_rate=1e-5,  
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=32,
+    num_train_epochs=1,
+model_2 threshold = 0.4
+my_predictions.txt: f1=0.8846854202506725, prec=0.8997228914494835, recall=0.8701423420082868
+
+max_length=512
+learning_rate=3e-5,
+    per_device_train_batch_size=8,   
+    per_device_eval_batch_size=16,   
+    num_train_epochs=3,
+threshold = 0.4
+my_predictions_512.txt: f1=0.8902113138207114, prec=0.8974740332053166, recall=0.8830651965144644
+
+
+From teacher
+ground_truth.txt: f1=0.8819036846582673, prec=0.8746994994013557, recall=0.8892275253977382
+
+
+[linyaodu@puhti-login11 Linyao_deep_learning]$ python find_error.py 
+--- Line 1667 ---
+Ground Truth: {'0'}
+Prediction: {'1', '0'}
+----------------
+--- Line 1677 ---
+Ground Truth: {'0'}
+Prediction: {'1', '0'}
+----------------
+--- Line 2337 ---
+Ground Truth: {'0'}
+Prediction: {'1', '0'}
+----------------
+--- Line 2343 ---
+Ground Truth: {'0'}
+Prediction: {'1', '0'}
+----------------
+--- Line 2826 ---
+Ground Truth: {'0'}
+Prediction: {'1', '0'}
+----------------
+
+
+[linyaodu@puhti-login11 Linyao_deep_learning]$ python get_5_texts.py 
+
+
+======  Line 1667 ======
+Bre-X shares resume trade, wreak havoc in Toronto. Bre-X Minerals Ltd. resumed trading again on Tuesday, wreaking havoc on the Toronto Stock Exchange and causing computers to crash at Canada's biggest stock market.
+It was the first time the stock had traded since last Thursday when investors slashed almost C$3 billion ($2.19 billion) off Bre-X's stock market value.
+A flurry of news releases, shareholder lawsuits and a deepening wrangle between Bre-X and Toronto Stock Exchange regulators left investors unclear which way to turn.
+While the furore surrounding the troubled Calgary, Alberta-based Bre-X had shaken confidence in Canadian mining stocks, some bold investors bought the stock in droves, pushing the price up C$1.35 to C$3.85 in frenetic turnover of 7.78 million shares in the first 22 minutes of trading.
+The stock was halted all day on Monday and re-opened midmorning on Tuesday.
+Bre-X has been under heavy fire since last week when its partner in Indonesia, Freeport-McMoRan Copper & Gold Inc., revealed that early drilling samples performed during its due diligence process on the Busang gold property in the rain forests of Borneo turned up "insignificant" amounts of gold.
+Bre-X, which had stated that the property could hold up to 71 million ounces of ore, issued a statement on Tuesday shedding little light on the increasingly murky situation.
+The terse release said Bre-X needed more time to study a report from engineering firm Kilborn SNC-Lavalin related to a check assay program at the Indonesian gold property.
+Despite strong wording contained in four class action lawsuits filed in the United States in recent days, Indonesia's Mines and Energy Minister Ida Bagus Sudjana said on Tuesday his ministry was not in a position to judge the truth of Bre-X's claims about the amount of gold in Busang.
+North American investors, at least, appeared willing to play the odds, with many believing that the stock's potential downside has been significantly reduced.
+But the huge volume in Bre-X shares crippled the Toronto exchange's trading systems, just as it did twice on Thursday.
+The exchange admitted its outdated computers were unable to cope with the fantastic volume in Bre-X.
+"It's old architecture. It was developed when the volumes here at the TSE weren't as high, so it's not able to handle increased volumes that we're experiencing right now," said exchange spokeswoman Jane Wong.
+Computer trading crashed for almost an hour on Tuesday morning. The TSE said later it would not resume trading in Bre-X shares for the rest of the day as it grappled with the technical problems.
+Bre-X shares continued trading on Nasdaq, where they were up 75 cents to $2.50.
+Bre-X Chief Executive David Walsh is involved in an increasingly ugly wrangle with Canada's largest stock market over whether or not the shares should remain halted.
+"It's a verbal fist fight that has developed between David Walsh and (TSE President) Rowland Fleming," said Fred Ketchen, director of equity trading at ScotiaMcLeod Inc. and chairman of the TSE's trading policy committee.
+The TSE and Bre-X have each issued several statements in the past few days. Bre-X pleaded with the TSE to keep the stock halted until after the audit of Busang's drilling results. 
+Ketchen said all the material news now available was in the market and that investors knew that the next major step would be the completion of the Busang audit by Strathcona Minerals Services Inc., a Toronto-based independent engineering consulting firm.
+"I believe that if it's in the market place, the public should have the right to trade on that," Ketchen said. "I think that continuous trading is important."
+He said a recommendation in the mid-1980s, which the TSE still followed, stated that trading halts should coincide with the release of material news but should be kept as short as possible.
+Many investors were steering clear of the stock until the results of the drilling audit were revealed.
+"It's something we're avoiding. We wouldn't touch it until we have more information from Strathcona," said Yorkton Securities analyst Doug Leishman.
+"Strathcona is the referee here. We would want to see something from Strathcona before we change our opinion."
+
+
+======  Line 1677 ======
+U.S. manufacturing surges, economy adds momentum. Manufacturing gained steam in March, a key private-sector report released on Tuesday showed, yet there was no sign of troubling price pressures as financial markets were roiled again by fear of more interest rate rises.
+The National Association of Purchasing Management, whose members buy raw materials for the nation's factories, said its index of manufacturing activity climbed to 55.0 in March -- the highest since February 1995 when it was also at that level -- from 53.1 in February.
+A reading above 50 in the index shows expanding activity. March was the 71st straight month -- nearly six years -- in which the manufacturing index indicated growth.
+The purchasing managers' summary was one of a trio of reports that further demonstrated the economy's vitality as it completed six years of steady expansion last month.
+It was intensely awaited by analysts after two days of steep stock market losses since the Federal Reserve raised short-term interest rates last week as a preemptive strike against inflation. Its price index dropped to 50.9 percent from 55.1 percent, reflecting a slower rate of inflation.
+Nonetheless, stock prices fell on Tuesday, though bond prices steadied.
+Separately, the Commerce Department said spending on new construction increased in February at the briskest rate in nearly a year, up 2.3 percent to a seasonally adjusted annual rate of $603.8 billion after a 0.3 percent January gain.
+Milder-than-normal weather after a bitter January boosted building activity across the board for private and government-financed projects from new housing to offices and water treatment plants.
+A third report from the Conference Board showed its broad-based index of leading indicators flashing a green light for steady growth as it rose 0.5 percent in February after a 0.3 percent gain in January.
+The February rise in the index, which is designed to forecast economic activity six to nine months ahead, was the largest since a 0.9 percent rise last February, the business research group said.
+"The economy is showing solid growth with inflation still well-contained," said economist Lynn Reaser of Barnett Banks Inc. in Jacksonville, Fla.
+"But the economy, in terms of labour markets, is at full employment," Reaser added. "The risk is still on the side of higher inflation rather than recession."
+The Federal Reserve cited its concern about strong demand last week when it announced a quarter percentage point rise in short-term interest rates. Many analysts expect more rate rises later this year until the central bank is convinced that costlier credit is putting a brake on demand.
+The purchasing managers' report showed gains in new orders, tighter supplier deliveries, rising employment and more export orders last month that suggest continuing momentum for the economy.
+"Clearly these numbers are pointing to stronger growth through the second quarter," said economist David Jones of Aubrey G. Lanston & Co. in New York, possibly three consecutive quarters of expansion at a 3 percent to 4 percent annual rate.
+"That's far in excess of the economy's long-term potential," Jones added. The Fed has set a target of around 2 percent to 2-1/4 percent as its ideal level f
+or sustained increases in national output without risking an inflationary flare-up in wages and prices.
+The February leading index, seen as an indicator of the economy's direction, was broadly higher with nine of its 10 separate component measures turning up f
+rom January.
+The largest contributors to the overall gain were fewer unemployment claims and slower deliveries, which suggested that suppliers were having a harder time 
+meeting brisk demand.
+The Commerce Department's finding that February construction picked up was anticipated because it was previously reported that there was a bulge in hiring f
+or construction jobs during the month.
+The size of the gain, however, was larger than anticipated. The department said it was the biggest surge in construction spending since a matching 2.3 perce
+nt rise in March of last year. The last time there was a bigger spending jump was nearly three years ago, in March 1994, when it gained 3.4 percent.
+Privately financed building rose 1.8 percent to $456 billion a year in February after a 0.6 percent January gain.
+Government spending on construction projects surged 4.1 percent to a rate of $147.9 billion in February after a 0.4 percent fall in January. Spending was up
+ on public housing projects, for schools, highways and streets, sewers and water treatment plants.
+======  Line 2337 ======
+UK will not take part in fudged EMU - Blair. Labour leader Tony Blair said on Tuesday that if he won the May 1 UK election he would not take Britain into a 
+fudged single currency.
+In what aides said was his most sceptical speech yet on Europe, Blair said it was not even certain that economic and monetary union would start on schedule 
+in 1999.
+He told businessmen in Derby that any decision to join EMU would have to be ratified by a referendum.
+There is no question of it being imposed on the country, slunk through undercover or by a sidewind. Even for such a proposition to be made, we would have to
+ be absolutely sure that it would be in Britains interests - British jobs, British investment, British industry.
+We would not join in any fudged single currency or one not in Britains interests. Period,, Blair said in his speech.
+Aides said Blair wanted to spell out an uncompromising line on EMU on the first formal day of the election campaign to head off accusations by the ruling Co
+nservatives that a Labour government would sell out Britains national interests in Europe.
+-- London newsroom +44 171 542 7717
+======  Line 2343 ======
+Decision on EMU members seen in late-April 1998. The decision on which countries will take part in a common European currency is expected in late-April of 1
+998, a European Commission spokesman said on Tuesday.
+The timing of the fateful decision is among several issues EU finance ministers and central bankers will discuss at a informal meeting this weekend in the N
+etherlands.
+While a precise date might not be set at the seaside resort of Noordwijk, the logistics of the EU decision-making process suggests a late-April timetable, t
+he official said.
+"It is the soonest that we can imagine a decision on participating countries," a Commission spokesman told reporters.
+Before the decision is taken several hurdles must be overcome, including separate reports by the European Commission and the Frankfurt-based European Moneta
+ry Institute (EMI) on the degree of economic convergence within the 15-nation bloc.
+Countries wishing to join economic and monetary union (EMU), expected in 1999, must meet various criteria set out in the Maastricht treaty on deficits, debt
+, inflation, interest rates and exchange rates.
+Reliable economic data for 1997, used to make the assessment, is expected towards the end of February 1998, the spokesman said.
+Once available, both the Commission and the EMI will need about two weeks to come up with their convergence reports which are designed to assess objectively
+ how each country stands in relation to the criteria.
+After the evaluation, there is approximately a six-week consultation period with the European Parliament which will offer its own thinking on the candidates
+.
+The parliament's views, however, are not in any way binding, but more a formality in line with the treaty.
+It is after this period that EU finance ministers, voting under a qualified majority, determine which countries actually join the single currency.
+In addition to the convergence report, the Commission will separately offer an opinion on which countries are fit for membership, an added responsibility no
+t assigned to the EMI, the spokesman added.
+The Commission's EMU recommendations might be made known at the time of its convergence report, he added.
+-- Brussels newsroom 32 2 287 6838
+======  Line 2826 ======
+Hong Kong stocks plummet in early trade. Hong Kong stocks plunged in early Tuesday morning trade as investors and traders left the market following Wall Str
+eet's Easter holiday slide, brokers said.
+"This is a reaction to the Dow's 300-point fall," said Peter Lai, associate director of OCBC Securities. "Hong Kong always reacts more vigorously."
+The Hang Seng was trading 494 points lower at 12,040 after bouncing off 12,029.39, the morning's low and the lowest point the market has traded this year.
+Turnover was a healthy HK$1.42 billion after 30 minutes of trade.
+The Dow industrials posted their sixth largest point drop in history on Monday, sliding 157.11 points or 2.33 percent to 6,583.48, after falling 140 points 
+on Thursday.
+The April Hang Seng Futures contract hit a low of 11,850 at the open, then bounced back slightly to trade 508 points lower at 11,955 on trade of 7,000 contr
+acts.
+The May contract was 485 points at 11,975 but on very little turnover.
+"In the short term, we are likely to remain at the 12,000 for a while," said Lai.
+Properties led the market down, with the sector index down 5.38 percent. Finance followed with a drop of 3.81 percent.
+Cheung Kong Holdings slipped HK$4.00 to HK$64.25, off 5.9 percent and Henderson Land shed HK$3.50 to HK$60.50, off 5.45 percent.
+Index heavyweight HSBC Holdings plummeted HK$7.50 or 4.2 percent at HK$172.50 and Hang Seng Bank slid HK$3.75 at HK$76.25, off 4.70 percent.
+Valiantly bucking the trend at the open was COSCO Pacific which rose HK$0.05 to HK$10.25 before easing HK$0.10 to trade at HK$10.00
+China Merchants Hai Hong slipped HK$0.25 to HK$5.25. The company will report final results on Tuesday.
+-- Kathleen Kearney (852) 2843 6933
